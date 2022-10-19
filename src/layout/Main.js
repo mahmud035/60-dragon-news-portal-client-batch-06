@@ -15,7 +15,7 @@ const Main = () => {
       <div>
         <Container>
           <Row>
-            <Col lg={2}>
+            <Col lg={2} className="d-none d-lg-block">
               <LeftSideNav></LeftSideNav>
             </Col>
             <Col lg={7}>
@@ -27,7 +27,9 @@ const Main = () => {
           </Row>
         </Container>
       </div>
-      <Footer></Footer>
+      <div className="container text-center">
+        <Footer></Footer>
+      </div>
     </div>
   );
 };
