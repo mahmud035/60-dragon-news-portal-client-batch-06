@@ -3,7 +3,7 @@ import React from 'react';
 const Category = () => {
   return (
     <div>
-      <h3>This is category</h3>
+      <h3>This is Category</h3>
     </div>
   );
 };
