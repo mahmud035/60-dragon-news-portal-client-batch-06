@@ -11,7 +11,7 @@ const NewsSummaryCard = ({ news }) => {
   const { title, _id, total_view, author, details, image_url, rating } = news;
   return (
     <div>
-      <Card className=" mb-4">
+      <Card className=" mb-4 shadow-sm border-0">
         <Card.Header>
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex gap-2 align-items-center">
