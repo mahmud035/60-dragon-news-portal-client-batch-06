@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
+  const [error, setError] = useState('');
   const { emailSignIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -25,10 +26,12 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         toast.success('Logged in successfully');
+        setError('');
         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
+        setError(error.message);
         toast.error(error.message);
       });
 
@@ -61,6 +64,8 @@ const Login = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+
+        <Form.Text className="text-danger">{error}</Form.Text>
       </Form>
     </div>
   );

@@ -5,6 +5,7 @@ import Home from '../../Pages/Home/Home.js/Home';
 import Login from '../../Pages/Login/Login';
 import News from '../../Pages/News/News/News';
 import Register from '../../Pages/Register/Register';
+import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
 
 const router = createBrowserRouter([
   {
@@ -13,14 +14,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>,
+        element: (
+          <PrivateRoutes>
+            <Home></Home>
+          </PrivateRoutes>
+        ),
         loader: () => fetch('http://localhost:5000/news'),
       },
       {
         path: '/category/:id',
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/${params.id}`),
-        element: <Category></Category>,
+        element: (
+          <PrivateRoutes>
+            <Category></Category>
+          </PrivateRoutes>
+        ),
       },
       {
         path: '/news/:id',

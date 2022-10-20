@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState('');
+  const { createUser, verifyEmail } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,9 +25,18 @@ const Register = () => {
         const user = result.user;
         console.log(user);
         toast.success('User created successfully');
+        setError('');
+
+        //! Send Verification Email
+        verifyEmail().then(() => {
+          toast.success('Email verification sent!');
+        });
+
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
+        setError(error.message);
         toast.error(error.message);
       });
 
@@ -66,6 +79,7 @@ const Register = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Form.Text className="text-danger">{error}</Form.Text>
       </Form>
     </div>
   );
