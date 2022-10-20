@@ -45,7 +45,7 @@ const Header = () => {
             <Nav.Link eventKey={2} href="#memes">
               {user?.uid ? (
                 <>
-                  <Button onClick={handleLogOut} variant="light">
+                  <Button onClick={handleLogOut} variant="danger">
                     Log Out
                   </Button>
                   <span> {user?.displayName}</span> &nbsp;
