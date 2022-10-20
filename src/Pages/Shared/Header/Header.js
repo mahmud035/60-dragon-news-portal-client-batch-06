@@ -7,10 +7,21 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.warn('User logged out');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Navbar
@@ -32,8 +43,26 @@ const Header = () => {
           </Nav>
           <Nav>
             <Nav.Link eventKey={2} href="#memes">
-              {user?.displayName}
+              {user?.uid ? (
+                <>
+                  <Button onClick={handleLogOut} variant="light">
+                    Log Out
+                  </Button>
+                  <span> {user?.displayName}</span> &nbsp;
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <Button variant="success">Login</Button>
+                  </Link>
+                  &nbsp;
+                  <Link to="/register">
+                    <Button variant="info">Register</Button>
+                  </Link>
+                </>
+              )}
             </Nav.Link>
+
             <Nav.Link eventKey={2} href="#memes">
               {user?.photoURL ? (
                 <Image
