@@ -2,12 +2,13 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
-import { FaRegBookmark, FaShareAlt } from 'react-icons/fa';
+import { FaRegBookmark, FaShareAlt, FaStar } from 'react-icons/fa';
+import { GrView } from 'react-icons/gr';
 
 const NewsSummaryCard = ({ news }) => {
-  console.log(news);
+  // console.log(news);
 
-  const { title, _id, total_view, author, details, image_url } = news;
+  const { title, _id, total_view, author, details, image_url, rating } = news;
   return (
     <div>
       <Card className=" mb-4">
@@ -16,12 +17,12 @@ const NewsSummaryCard = ({ news }) => {
             <div className="d-flex gap-2 align-items-center">
               <Image
                 roundedCircle
-                src={author?.img}
+                src={author?.img || 'N/A'}
                 style={{ height: '60px' }}
               ></Image>
               <div>
-                <h6 className="mb-1">{author?.name}</h6>
-                <p className="mb-1">{author?.published_date}</p>
+                <h6 className="mb-1">{author?.name || 'N/A'}</h6>
+                <p className="mb-1">{author?.published_date || 'N/A'}</p>
               </div>
             </div>
             <div>
@@ -40,7 +41,16 @@ const NewsSummaryCard = ({ news }) => {
             </p>
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        <Card.Footer>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center gap-2">
+              <FaStar style={{ color: 'goldenrod' }} /> {rating?.number}
+            </div>
+            <div className="d-flex align-items-center gap-2">
+              <GrView /> {total_view}
+            </div>
+          </div>
+        </Card.Footer>
       </Card>
     </div>
   );

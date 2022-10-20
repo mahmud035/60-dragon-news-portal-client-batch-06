@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import NewsSummaryCard from '../../Shared/NewsSummaryCard/NewsSummaryCard';
 
 const Category = () => {
   const categoryNews = useLoaderData();
@@ -7,7 +8,11 @@ const Category = () => {
 
   return (
     <div>
-      <h3>This is Category: {categoryNews.length}</h3>
+      <h3>This Category has: {categoryNews.length} news</h3>
+
+      {categoryNews.map((news, index) => (
+        <NewsSummaryCard key={index} news={news} />
+      ))}
     </div>
   );
 };
