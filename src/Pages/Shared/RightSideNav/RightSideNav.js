@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -12,12 +12,32 @@ import {
   FaYoutube,
 } from 'react-icons/fa';
 import BrandCarousel from '../BrandCarousel/BrandCarousel';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const RightSideNav = () => {
+  const { googleSignIn } = useContext(AuthContext);
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('Successfully logged in');
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
   return (
     <div>
       <ButtonGroup vertical>
-        <Button variant="outline-primary" className="mb-2 rounded">
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="outline-primary"
+          className="mb-2 rounded"
+        >
           <FcGoogle size={24} /> Login with Google
         </Button>
         <Button variant="outline-dark" className="mb-4 rounded">
