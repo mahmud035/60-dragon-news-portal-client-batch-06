@@ -46,7 +46,9 @@ const RightSideNav = () => {
         </ListGroup>
       </div>
 
-      <BrandCarousel></BrandCarousel>
+      <div>
+        <BrandCarousel></BrandCarousel>
+      </div>
     </div>
   );
 };
