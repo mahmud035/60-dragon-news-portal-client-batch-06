@@ -1,24 +1,32 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
   const [error, setError] = useState('');
-  const { createUser, verifyEmail } = useContext(AuthContext);
+  const [accepted, setAccepted] = useState(false);
+  const { createUser, verifyEmail, updateUserProfile } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const handleAccepted = (e) => {
+    setAccepted(e.target.checked); // work same as below
+    // setAccepted(!accepted); // Toggling the value of accepted.
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const form = e.target;
-    // const name = form.email.value;
-    // const photoURL = form.photo.value;
+    const name = form.name.value;
+    const photoURL = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+    console.log(name, email, password, photoURL);
 
     createUser(email, password)
       .then((result) => {
@@ -33,6 +41,7 @@ const Register = () => {
         });
 
         navigate('/');
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +50,20 @@ const Register = () => {
       });
 
     form.reset();
+  };
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {
+        toast.success('Profile updated');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -74,8 +97,19 @@ const Register = () => {
           required
         />
       </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check
+          type="checkbox"
+          onClick={handleAccepted}
+          label={
+            <>
+              Accept <Link to="/terms-and-condition">Terms and Conditions</Link>
+            </>
+          }
+        />
+      </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={!accepted}>
         Submit
       </Button>
       <Form.Text className="text-danger">{error}</Form.Text>

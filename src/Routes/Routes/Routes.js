@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../../layout/Main';
+import TermsAndCondition from '../../Others/TermsAndCondition/TermsAndCondition';
 import Category from '../../Pages/Category/Category/Category';
 import Home from '../../Pages/Home/Home.js/Home';
 import Login from '../../Pages/Login/Login';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>,
+      },
+      {
+        path: '/terms-and-condition',
+        element: <TermsAndCondition></TermsAndCondition>,
       },
     ],
   },
