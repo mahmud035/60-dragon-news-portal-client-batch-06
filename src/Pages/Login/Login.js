@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
   const [error, setError] = useState('');
-  const { emailSignIn } = useContext(AuthContext);
+  const { emailSignIn, user } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,9 +25,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success('Logged in successfully');
         setError('');
-        navigate(from, { replace: true });
+
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+          toast.success('Logged in successfully');
+        } else {
+          toast.info('Please verify your email address.');
+        }
       })
       .catch((error) => {
         console.log(error);

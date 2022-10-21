@@ -26,7 +26,6 @@ const Register = () => {
     const photoURL = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password, photoURL);
 
     createUser(email, password)
       .then((result) => {
@@ -34,11 +33,7 @@ const Register = () => {
         console.log(user);
         toast.success('User created successfully');
         setError('');
-
-        //! Send Verification Email
-        verifyEmail().then(() => {
-          toast.success('Email verification sent!');
-        });
+        handleEmailVerification();
 
         navigate('/');
         handleUpdateUserProfile(name, photoURL);
@@ -64,6 +59,12 @@ const Register = () => {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleEmailVerification = () => {
+    verifyEmail().then(() => {
+      toast.info('Please verify your email address.');
+    });
   };
 
   return (
