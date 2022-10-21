@@ -14,26 +14,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: (
-          <PrivateRoutes>
-            <Home></Home>
-          </PrivateRoutes>
-        ),
+        element: <Home></Home>,
         loader: () => fetch('http://localhost:5000/news'),
       },
       {
         path: '/category/:id',
         loader: ({ params }) =>
           fetch(`http://localhost:5000/category/${params.id}`),
-        element: (
-          <PrivateRoutes>
-            <Category></Category>
-          </PrivateRoutes>
-        ),
+        element: <Category></Category>,
       },
       {
         path: '/news/:id',
-        element: <News></News>,
+        element: (
+          <PrivateRoutes>
+            <News></News>
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/news/${params.id}`),
       },
