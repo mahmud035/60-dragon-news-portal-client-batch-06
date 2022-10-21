@@ -35,10 +35,8 @@ const NewsSummaryCard = ({ news }) => {
           <Card.Title>{title}</Card.Title>
           <Card.Img src={image_url} className="my-3" />
           <Card.Text>
-            <p>
-              {details.length > 250 ? details.slice(0, 250) + '...' : details}
-              <Link to={`/news/${_id}`}>Read More</Link>
-            </p>
+            {details.length > 250 ? details.slice(0, 250) + '...' : details}
+            <Link to={`/news/${_id}`}>Read More</Link>
           </Card.Text>
         </Card.Body>
         <Card.Footer>

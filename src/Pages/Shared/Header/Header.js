@@ -42,7 +42,7 @@ const Header = () => {
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link eventKey={2} href="#memes">
+            <>
               {user?.uid ? (
                 <>
                   <Button onClick={handleLogOut} variant="danger">
@@ -61,9 +61,9 @@ const Header = () => {
                   </Link>
                 </>
               )}
-            </Nav.Link>
+            </>
 
-            <Nav.Link eventKey={2} href="#memes">
+            <>
               {user?.photoURL ? (
                 <Image
                   roundedCircle
@@ -73,7 +73,7 @@ const Header = () => {
               ) : (
                 <FaUserCircle size={32} />
               )}
-            </Nav.Link>
+            </>
           </Nav>
           <div className="d-lg-none">
             <LeftSideNav></LeftSideNav>
