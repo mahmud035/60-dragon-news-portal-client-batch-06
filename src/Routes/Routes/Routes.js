@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../../layout/Main';
+import Profile from '../../Others/Profile/Profile';
 import TermsAndCondition from '../../Others/TermsAndCondition/TermsAndCondition';
 import Category from '../../Pages/Category/Category/Category';
 import Home from '../../Pages/Home/Home.js/Home';
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: '/terms-and-condition',
         element: <TermsAndCondition></TermsAndCondition>,
+      },
+      {
+        path: '/profile',
+        element: (
+          <PrivateRoutes>
+            <Profile></Profile>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

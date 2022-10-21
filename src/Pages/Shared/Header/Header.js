@@ -33,7 +33,9 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand>
-          <Link to="/">Dragon News</Link>
+          <Link to="/" className="text-decoration-none h4 ">
+            Dragon News
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -49,7 +51,6 @@ const Header = () => {
                     Log Out
                   </Button>
                   <span className="text-white px-3 mt-1">
-                    {' '}
                     {user?.displayName}
                   </span>
                   &nbsp;
@@ -67,7 +68,7 @@ const Header = () => {
               )}
             </>
 
-            <>
+            <Link to="/profile">
               {user?.photoURL ? (
                 <Image
                   roundedCircle
@@ -77,7 +78,7 @@ const Header = () => {
               ) : (
                 <FaUserCircle size={32} />
               )}
-            </>
+            </Link>
           </Nav>
           <div className="d-lg-none">
             <LeftSideNav></LeftSideNav>
