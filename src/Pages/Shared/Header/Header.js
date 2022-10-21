@@ -48,7 +48,11 @@ const Header = () => {
                   <Button onClick={handleLogOut} variant="danger">
                     Log Out
                   </Button>
-                  <span> {user?.displayName}</span> &nbsp;
+                  <span className="text-white px-3 mt-1">
+                    {' '}
+                    {user?.displayName}
+                  </span>
+                  &nbsp;
                 </>
               ) : (
                 <>
