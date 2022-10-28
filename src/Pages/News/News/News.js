@@ -2,11 +2,14 @@ import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
+import useSetTitle from '../../../hooks/useSetTitle';
 
 const News = () => {
   const singleNews = useLoaderData();
   // console.log(singleNews);
   const { title, image_url, details, category_id } = singleNews;
+
+  useSetTitle('News Details');
 
   return (
     <div>
