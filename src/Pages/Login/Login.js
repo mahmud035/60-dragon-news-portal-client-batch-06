@@ -40,7 +40,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         setError(error.message);
-        toast.error(error.message);
+        toast.error(error.message.slice(22, -2));
       })
       .finally(() => {
         setLoading(false);
