@@ -17,12 +17,14 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/news'),
+        loader: () => fetch('https://dragon-news-server-henna.vercel.app/news'),
       },
       {
         path: '/category/:id',
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/category/${params.id}`),
+          fetch(
+            `https://dragon-news-server-henna.vercel.app/category/${params.id}`
+          ),
         element: <Category></Category>,
       },
       {
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/news/${params.id}`),
+          fetch(
+            `https://dragon-news-server-henna.vercel.app/news/${params.id}`
+          ),
       },
       {
         path: '/login',
